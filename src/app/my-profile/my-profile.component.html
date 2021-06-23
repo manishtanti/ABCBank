@@ -1,0 +1,133 @@
+<form #profileForm="ngForm" (ngSubmit)="onUpdate()">
+    <div class="row heading">
+        <div class="col-lg-5"></div>
+        <div class="col-lg-4">
+            <h1>Your Profile</h1>
+        </div>
+
+        <div class="col-lg-3">
+            <h2>Welcome {{customerName}}</h2>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-lg-4"></div>
+        <label for="staticEmail" class="col-lg-2 col-form-label">Name:</label>
+        <div class="col-lg-3">
+            <input type="text" readonly class="form-control-plaintext" name="name"
+                [(ngModel)]="customerDetails.customerName">
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-lg-4"></div>
+        <label for="staticEmail" class="col-lg-2 col-form-label">DOB:</label>
+        <div class="col-lg-3">
+            <!-- <input type="text" readonly class="form-control-plaintext" name="dob" [(ngModel)]="customerDetails.dob"> -->
+            <p>{{customerDetails.dob | date:'dd-MM-yyyy'}}</p>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+    <div class="form-group row">
+        <div class="col-lg-4"></div>
+        <label for="staticEmail" class="col-lg-2 col-form-label">Phone Number:</label>
+        <div class="col-lg-3">
+            <input type="text" readonly class="form-control-plaintext" name="mobileNumber"
+                [(ngModel)]="customerDetails.mobileNumber">
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+    <div class="form-group row">
+        <div class="col-lg-4"></div>
+        <label for="staticEmail" class="col-lg-2 col-form-label">Pan Number:</label>
+        <div class="col-lg-3">
+            <input type="text" readonly class="form-control-plaintext" name="panNumber"
+                [(ngModel)]="customerDetails.panNumber">
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+    <div class="form-group row">
+        <div class="col-lg-4"></div>
+        <label for="inputPassword" class="col-lg-2 col-form-label"><span class="mandatory">*</span>Address:</label>
+        <div class="col-lg-3">
+            <input type="text" class="form-control" name="address" required pattern=".{10,}"
+                [(ngModel)]="customerDetails.address" [class.is-invalid]="address.invalid && address.touched"
+                #address="ngModel">
+            <div *ngIf="address.errors && (address.valid || address.touched)">
+                <small class="text-danger" *ngIf="address.errors.required">Please enter the
+                    address</small>
+                <small class="text-danger" *ngIf="address.errors.pattern">address should be minimum 10
+                    length</small>
+            </div>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+    <div class="form-group row">
+        <div class="col-lg-4"></div>
+        <label for="inputPassword" class="col-lg-2 col-form-label"><span class="mandatory">*</span>City:</label>
+        <div class="col-lg-3">
+            <input type="text" class="form-control" name="city" required pattern=".{3,}"
+                [(ngModel)]="customerDetails.city" [class.is-invalid]="city.invalid && city.touched" #city="ngModel">
+            <div *ngIf="city.errors && (city.valid || city.touched)">
+                <small class="text-danger" *ngIf="city.errors.required">Please enter the
+                    city</small>
+                <small class="text-danger" *ngIf="city.errors.pattern">city should be minimum 3
+                    length</small>
+            </div>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+    <div class="form-group row">
+        <div class="col-lg-4"></div>
+        <label for="inputPassword" class="col-lg-2 col-form-label"><span class="mandatory">*</span>Pin Code:</label>
+        <div class="col-lg-3">
+            <input type="text" class="form-control" name="pinCode" required pattern="[0-9]{6}"
+                [(ngModel)]="customerDetails.pinCode" [class.is-invalid]="pinCode.invalid && pinCode.touched"
+                #pinCode="ngModel">
+
+            <div *ngIf="pinCode.errors && (pinCode.valid || pinCode.touched)">
+                <small class="text-danger" *ngIf="pinCode.errors.required">Please enter the
+                    pinCode</small>
+                <small class="text-danger" *ngIf="pinCode.errors.pattern">Please enter valid pinCode</small>
+            </div>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+    <div class="form-group row">
+        <div class="col-lg-4"></div>
+        <label for="inputPassword" class="col-lg-2 col-form-label"><span class="mandatory">*</span>Country:</label>
+        <div class="col-lg-3">
+            <input type="text" class="form-control" name="country" required pattern=".{3,}"
+                [(ngModel)]="customerDetails.country" [class.is-invalid]="country.invalid && country.touched"
+                #country="ngModel">
+            <div *ngIf="country.errors && (country.valid || country.touched)">
+                <small class="text-danger" *ngIf="country.errors.required">Please enter the
+                    country</small>
+                <small class="text-danger" *ngIf="country.errors.pattern">country should be minimum 3
+                    length</small>
+            </div>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+    <div class="form-group row">
+        <div class="col-lg-4"></div>
+        <label for="email" class="col-lg-2 col-form-label">Email:</label>
+        <div class="col-lg-3">
+            <input type="text" class="form-control" name="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                [(ngModel)]="customerDetails.email" [class.is-invalid]="email.invalid && email.touched"
+                #email="ngModel">
+            <div *ngIf="email.errors && (email.valid || email.touched)">
+                <small class="text-danger" *ngIf="email.errors.required">Please enter the
+                    email</small>
+                <small class="text-danger" *ngIf="email.errors.pattern">please enter valid email</small>
+            </div>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+    <div class="form-group row">
+        <div class="col-lg-6"></div>
+        <button [disabled]="profileForm.form.invalid" class="btn btn-primary">Submit</button>
+        <div class="col-lg-6"></div>
+    </div>
+</form>
+<simple-notifications></simple-notifications>

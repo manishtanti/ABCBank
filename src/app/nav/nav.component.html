@@ -1,0 +1,40 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+        <mat-toolbar>Menu</mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item routerLink="profile" routerLinkActive="active">My Profile</a>
+            <hr>
+            <a mat-list-item routerLink="viewStatement" routerLinkActive="active">View Statement</a>
+            <hr>
+            <a mat-list-item routerLink="changePassword" routerLinkActive="active">Change Password</a>
+            <hr>
+            <a mat-list-item [matMenuTriggerFor]="appMenu">Make a Request</a>
+            <mat-menu #appMenu="matMenu" xPosition="before" yPosition="below">
+                <button mat-menu-item routerLink="chequeRequest" routerLinkActive="active">Cheque Book Request</button>
+                <button mat-menu-item routerLink="reportStolenCard" routerLinkActive="active">Report Lost/Stolen
+                    Card</button>
+                <button mat-menu-item routerLink="queryRequest" routerLinkActive="active">Query Request</button>
+            </mat-menu>
+            <hr>
+            <a mat-list-item routerLink="viewServiceRequest" routerLinkActive="active">View Request Status</a>
+            <hr>
+            <a mat-list-item (click)="logOut()">Log Out</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+                *ngIf="isHandset$ | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <span id="heading">ABC Bank</span>
+        </mat-toolbar>
+        <!-- Add Content Here -->
+        <router-outlet></router-outlet>
+        <app-footer></app-footer>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+<simple-notifications></simple-notifications>

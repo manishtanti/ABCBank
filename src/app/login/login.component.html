@@ -1,0 +1,60 @@
+<div class="outer" *ngIf="!getLogginStatus()">
+    <div class="header">ABC Bank</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-2"></div>
+            <div class="col-lg-6 col-md-8 login-box">
+
+                <div class="col-lg-12 login-title">
+                    User Login
+                </div>
+
+                <div class="col-lg-12 login-form">
+                    <div class="col-lg-12 login-form">
+                        <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+                            <div class="form-group">
+                                <label class="form-control-label">USERNAME</label>
+                                <input type="text" class="form-control" name="username" required pattern=".{5,}"
+                                    [(ngModel)]="user.username"
+                                    [class.is-invalid]="username.invalid && username.touched" #username="ngModel">
+                                <div *ngIf="username.errors && (username.valid || username.touched)">
+                                    <small class="text-white" *ngIf="username.errors.required">Please enter the
+                                        username</small>
+                                    <small class="text-white" *ngIf="username.errors.pattern">Username should be minimum
+                                        6
+                                        length</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">PASSWORD</label>
+                                <input type="password" class="form-control" name="password" required pattern=".{6,}"
+                                    [(ngModel)]="user.password"
+                                    [class.is-invalid]="password.invalid && password.touched" #password="ngModel">
+                                <div *ngIf="password.errors && (password.valid || password.touched)">
+                                    <small class="text-white" *ngIf="password.errors.required">Please enter the
+                                        password</small>
+                                    <small class="text-white" *ngIf="password.errors.pattern">Password should be minimum
+                                        6
+                                        length</small>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 loginbttm">
+                                <div class="col-lg-6 login-btm login-text">
+                                    <!-- Error Message -->
+                                </div>
+                                <div class="col-lg-6 login-btm login-button">
+                                    <button type="submit" class="btn btn-outline-primary"
+                                        [disabled]="loginForm.form.invalid">LOGIN</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-2"></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">Copyright@2001-2021</div>
+</div>
+<simple-notifications></simple-notifications>

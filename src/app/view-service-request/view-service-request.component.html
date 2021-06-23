@@ -1,0 +1,61 @@
+<div class="row heading">
+    <div class="col-lg-5"></div>
+    <div class="col-lg-4">
+        <h1>View Request Status</h1>
+    </div>
+    <div class="col-lg-3">
+        <h2>Welcome {{customerName}}</h2>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <button class="btn btn-outline-info" (click)="changeCat('cheque')">Cheque</button>
+        <button class=" btn btn-outline-info ml-2" (click)="changeCat('stolenCard')">Report Stolen Card</button>
+        <button class=" btn btn-outline-info ml-2" (click)="changeCat('query')">Query</button>
+    </div>
+</div>
+<div class=" col-lg-2">
+</div>
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Request Date</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Details</th>
+                    <th scope="col">Response</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="let req of dataSource | paginate:{id:'listing_pagination' ,itemsPerPage:10,currentPage:page,totalItems:totalRecords}; index as i">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ req.requestDate | date: 'dd-MM-yyyy'}}</td>
+                    <td>{{ req.requestType}}</td>
+                    <td>{{ req.requestDetails}}</td>
+                    <td>
+                        <p *ngIf="req.response==null">Under review</p>{{ req.response}}
+                    </td>
+                    <td>{{ req.status}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 d-flex justify-content-center p-3">
+        <pagination-controls id="listing_pagination" (pageChange)="page = $event">
+        </pagination-controls>
+    </div>
+    <div class="col-lg-2"></div>
+</div>

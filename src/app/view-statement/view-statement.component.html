@@ -1,0 +1,39 @@
+<div class="row heading">
+    <div class="col-lg-5"></div>
+    <div class="col-lg-4">
+        <h1>Your Accounts</h1>
+    </div>
+    <div class="col-lg-3">
+        <h2>Welcome {{customerName}}</h2>
+    </div>
+</div>
+<div class="col-lg-2"></div>
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+
+                    <th scope="col">Account Number</th>
+                    <th scope="col">Account Type</th>
+                    <th scope="col">Account Balance</th>
+                    <th scope="col">Average Balance</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ac of accounts">
+                    <td><a>{{ ac.accountNumber }}</a></td>
+                    <td>{{ ac.accountType}}</td>
+                    <td>{{ ac.accountBalance | currency:'INR'}}</td>
+                    <td>{{ ac.averageBalance | currency:'INR'}}</td>
+                    <td><button class="btn btn-outline-info p-1 m-0" (click)="showDetails(ac.accountNumber)">View
+                            Details</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-2"></div>
+</div>

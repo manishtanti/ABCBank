@@ -1,0 +1,65 @@
+<form #chequeForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row heading">
+        <div class="col-sm-5"></div>
+        <h1 class="col-sm-5">Cheque Book Request</h1>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-4"></div>
+        <label for="name" class="col-sm-2 col-form-label">Name:</label>
+        <div class="col-sm-3">
+            <input type="text" readonly class="form-control-plaintext" value="{{customerName}}">
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-4"></div>
+        <label for="requestType" class="col-sm-2 col-form-label">Account Number:</label>
+        <div class="col-sm-3">
+            <select name="requestType" class="form-control" [(ngModel)]="chequeRequest.account" #acNo="ngModel" required
+                [class.is-invalid]="acNo.invalid && acNo.touched">
+                <option value="" selected>Select your Account</option>
+                <option value="{{ac.accountNumber}}" *ngFor="let ac of accounts">{{ac.accountNumber}}</option>
+            </select>
+            <br>
+            <small class="text-danger" [class.d-none]="acNo.valid || acNo.untouched">please select the
+                Account</small>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-4"></div>
+        <label for="noOfLeaves" class="col-sm-2 col-form-label">No of Cheque Leaves:</label>
+        <div class="col-sm-3">
+            <div class="form-check d-inline mx-2">
+                <input class="form-check-input" type="radio" name="chequeLeaves"
+                    [(ngModel)]="chequeRequest.chequeLeaves" value="20" #chequeLeaves="ngModel" required>
+                <label class="form-check-label" for="20">20</label>
+            </div>
+            <div class="form-check d-inline mx-2">
+                <input class="form-check-input" type="radio" name="chequeLeaves"
+                    [(ngModel)]="chequeRequest.chequeLeaves" value="50" #chequeLeaves="ngModel" required>
+                <label class="form-check-label" for="50">50</label>
+            </div>
+            <div class="form-check d-inline mx-2">
+                <input class="form-check-input" type="radio" name="chequeLeaves"
+                    [(ngModel)]="chequeRequest.chequeLeaves" value="100" #chequeLeaves="ngModel" required>
+                <label class="form-check-label" for="100">100</label>
+            </div>
+            <div>
+
+                <small class="text-danger" [class.d-none]="chequeLeaves.valid">please select the no of leaves</small>
+            </div>
+
+        </div>
+        <div class=" col-sm-3">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-5"></div>
+        <button [disabled]="chequeForm.form.invalid" class="btn btn-primary">Submit</button>
+        <div class="col-sm-7"></div>
+    </div>
+</form>
+
+<simple-notifications></simple-notifications>
